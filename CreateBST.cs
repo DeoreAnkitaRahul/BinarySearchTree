@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
+
     public interface INode<T> where T : IComparable<T>
     {
         T Key { get; set; }
