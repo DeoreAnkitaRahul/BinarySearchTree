@@ -7,64 +7,58 @@ using System.Threading.Tasks;
 namespace BinarySearchTree
 {
 
-    public interface INode<T> where T : IComparable<T>
+    class CreateBST<T> where T : IComparable<T>
     {
-        T Key { get; set; }
-        INode<T> Left { get; set; }
-        INode<T> Right { get; set; }
-    }
-
-    public class BinaryNode<T> : INode<T> where T : IComparable<T>
-    {
-        public T Key { get; set; }
-        public INode<T> Left { get; set; }
-        public INode<T> Right { get; set; }
-
-        public BinaryNode(T key)
+        public T NodeData { get; set; }
+        public CreateBST<T> leftTree { get; set; }
+        public CreateBST<T> rightTree { get; set; }
+        public CreateBST(T nodeData)
         {
-            Key = key;
-            Left = null;
-            Right = null;
+            this.NodeData = nodeData;
+            this.rightTree = null;
+            this.leftTree = null;
         }
-    }
-
-    public class CreateBST<T> where T : IComparable<T>
-    {
-        public INode<T> Root { get; set; }
-
-        public CreateBST(T key)
+        static int leftCount = 0, rightCount = 0;
+        bool result = false;
+        public void Insert(T item)
         {
-            Root = new BinaryNode<T>(key);
-        }
-
-        public void AddNode(T key)
-        {
-            AddNode(Root, key);
-        }
-
-        private void AddNode(INode<T> node, T key)
-        {
-            if (key.CompareTo(node.Key) < 0)
+            T currentNodeValue = this.NodeData;
+            if ((currentNodeValue.CompareTo(item)) > 0)
             {
-                if (node.Left == null)
+                if (this.leftTree == null)
                 {
-                    node.Left = new BinaryNode<T>(key);
+                    leftCount++;
+                    this.leftTree = new CreateBST<T>(item);
                 }
                 else
-                {
-                    AddNode(node.Left, key);
-                }
+                    this.leftTree.Insert(item);
             }
             else
             {
-                if (node.Right == null)
+                if (this.rightTree == null)
                 {
-                    node.Right = new BinaryNode<T>(key);
+                    rightCount++;
+                    this.rightTree = new CreateBST<T>(item);
                 }
                 else
-                {
-                    AddNode(node.Right, key);
-                }
+                    this.rightTree.Insert(item);
+            }
+        }
+
+        public void GetSize()
+        {
+            Console.WriteLine("Size" + " " + (1 + leftCount + rightCount));
+        }
+        public void Display()
+        {
+            if (this.leftTree != null)
+            {
+                this.leftTree.Display();
+            }
+            Console.WriteLine(this.NodeData.ToString());
+            if (this.rightTree != null)
+            {
+                this.rightTree.Display();
             }
         }
     }
