@@ -5,7 +5,7 @@
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Binary Search Tree Program");
-            BinarySearchTree<int> bst = new BinarySearchTree<int>(56);
+            CreateBST<int> bst = new CreateBST<int>(56);
             bst.AddNode(30);
             bst.AddNode(70);
 
