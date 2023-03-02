@@ -1,4 +1,4 @@
-﻿namespace BinarySearchTree   
+﻿namespace BinarySearchTree
 {
     class Program
     {
@@ -29,6 +29,8 @@
             bst.Insert(67);
             bst.Display();
             bst.GetSize();
+            bool result = bst.Search(63, bst);
+            Console.WriteLine(result);
         }
     }
 }
